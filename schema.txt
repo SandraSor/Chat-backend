@@ -1,0 +1,37 @@
+dialogs:
+- _id
+- author
+- partner
+- created_at, updated_at
+
+messages:
+- _id
+- text
+- dialog
+- unread
+- created_at, updated_at
+
+users:
+- _id
+- email
+- avatar
+- fullname
+- password (md5)
+- confirmed
+- confirm_hash
+- last_seen
+- created_at, updated_at
+
+npx tsc --init --rootDir src --outDir dist --esModuleInterop --resolveJsonModule --lib es6,dom --module commonjs
+
+"start": "json-server -w db.json -p 9999"
+
+"files": ["src/types/types.d.ts"],
+"typeRoots": ["./node_module/@types", "./src/types"]
+
+declare namespace Express {
+	import { IUser } from './models/User';
+	export interface Request {
+		user?: IUser;
+	}
+}
